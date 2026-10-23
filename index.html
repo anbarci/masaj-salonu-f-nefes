@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <title>Ilgın Masaj Salonu Denizli | Fiyatlar ve WhatsApp Randevu</title>
 <meta name="description" content="Denizli Pamukkale'de İsveç, derin doku, aromaterapi, sıcak taş ve sporcu masajı. Fiyatları görün, randevunuzu WhatsApp'tan ya da telefonla alın.">
 <meta name="robots" content="noindex">
@@ -251,6 +252,12 @@ address { font-style: normal; font-size: 1.2rem; }
 .cubuk.gizle { transform: translateY(110%); }
 @media (min-width: 760px) { .cubuk { display: none; } body { padding-bottom: 0; } }
 @media (prefers-reduced-motion: reduce) { .dugme, .cubuk, .galeri-oklar button { transition: none; } .dugme:active { transform: none; } .galeri { scroll-behavior: auto; } }
+.tema-simge { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; flex: none; padding: 0; border: 0; border-radius: var(--r-k, var(--r, 10px)); background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; cursor: pointer; }
+.tema-simge[hidden] { display: none; }
+.tema-simge svg { width: 1.25rem; height: 1.25rem; }
+.tema-simge .gunes, .tema-simge[data-koyu="1"] .ay { display: none; }
+.tema-simge[data-koyu="1"] .gunes { display: block; }
+@media (hover: hover) { .tema-simge:hover { background: color-mix(in srgb, currentColor 10%, transparent); } }
 </style>
 </head>
 <body>
@@ -258,15 +265,17 @@ address { font-style: normal; font-size: 1.2rem; }
   <symbol id="i-wa" viewBox="0 0 256 256"><path fill="currentColor" d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></symbol>
   <symbol id="i-tel" viewBox="0 0 256 256"><path fill="currentColor" d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/></symbol>
   <symbol id="i-yer" viewBox="0 0 256 256"><path fill="currentColor" d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></symbol>
+  <symbol id="i-ay" viewBox="0 0 256 256"><path fill="currentColor" d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></symbol>
+  <symbol id="i-gunes" viewBox="0 0 256 256"><path fill="currentColor" d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></symbol>
 </svg>
 <div class="ilerleme" aria-hidden="true"></div>
 <a class="atla" href="#icerik">İçeriğe geç</a>
-<p class="not">Ön tasarım F, animasyonlu. Salon adı, telefon, adres, fiyatlar ve metinler örnektir. Fotoğraflar Unsplash'ten geçici.</p>
 
 <header class="ust-blok">
     <div class="kap ust-ic">
       <a class="logo" href="./">Ilgın <span>Masaj Salonu</span></a>
       <div class="ust-eylem">
+        <button class="tema-simge" type="button" data-tema-dugme="simge" aria-label="Koyu temaya geç" hidden><svg class="ay" aria-hidden="true"><use href="#i-ay"/></svg><svg class="gunes" aria-hidden="true"><use href="#i-gunes"/></svg></button>
         <a href="tel:+905550000000" aria-label="Telefonla ara: 0 555 000 00 00"><svg class="i" aria-hidden="true"><use href="#i-tel"/></svg><span>0 555 000 00 00</span></a>
         <a class="dugme dugme-ana" href="https://wa.me/905550000000?text=Merhaba%2C%20masaj%20randevusu%20almak%20istiyorum."><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp'tan yaz</a>
       </div>
