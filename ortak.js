@@ -47,7 +47,8 @@
   const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Istanbul', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date()).map(x => [x.type, x.value]));
   const gun = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday);
   if (gun > -1) {
-    document.querySelectorAll('[data-durum]').forEach(el => { el.textContent = durum(gun, +p.hour * 60 + +p.minute); el.hidden = false; });
+    const metin = durum(gun, +p.hour * 60 + +p.minute);
+    document.querySelectorAll('[data-durum]').forEach(el => { el.textContent = metin; el.dataset.acik = metin.startsWith('Şu an açık') ? '1' : '0'; el.hidden = false; });
     document.querySelectorAll('tr[data-gun="' + gun + '"]').forEach(tr => {
       tr.classList.add('bugun');
       tr.querySelector('th').insertAdjacentHTML('beforeend', ' <span>bugün</span>');
